@@ -9,7 +9,8 @@ import (
 )
 
 const (
-	queryInsertUser = "INSERT INTO users(first_name, last_name, email, date_created) VALUES(?,?,?,?);"
+	indexUniqueEmail = "users.users_UN"
+	queryInsertUser  = "INSERT INTO users(first_name, last_name, email, date_created) VALUES(?,?,?,?);"
 )
 
 var (
@@ -46,7 +47,7 @@ func (user *User) Save() *errors.RestErr {
 	user.DateCreated = date.GetNowString()
 	insertResult, err := stmt.Exec(user.FirstName, user.LastName, user.Email, user.DateCreated)
 	if err != nil {
-		if strings.Contains(err.Error(), "users.users_UN") {
+		if strings.Contains(err.Error(), indexUniqueEmail) {
 			return errors.NewBadRequestError(fmt.Sprintf("email %s already exists", user.Email))
 		}
 		return errors.NewInternalServerError(fmt.Sprintf("error when trying to save user: %s", err.Error()))
