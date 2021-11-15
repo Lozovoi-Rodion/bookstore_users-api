@@ -3,6 +3,7 @@ module github.com/Lozovoi-Rodion/bookstore_users-api
 go 1.16
 
 require (
+	github.com/Lozovoi-Rodion/bookstore-oauth-go v0.0.0-20211111163438-0d5610fc2053 // indirect
 	github.com/gin-gonic/gin v1.7.4
 	github.com/go-playground/validator/v10 v10.9.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0
